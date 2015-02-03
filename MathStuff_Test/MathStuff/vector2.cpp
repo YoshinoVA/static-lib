@@ -77,7 +77,6 @@ namespace MathFuncs
 		temp.x = x + Other.x;
 		temp.y = y + Other.y;
 		temp.z = z + Other.z;
-		temp.m = sqrt(((x)+(y)+(z)) * 2);
 		return temp;
 	}
 	Vector3 Vector3::operator- (Vector3& Other)
@@ -86,7 +85,6 @@ namespace MathFuncs
 		temp.x = x - Other.x;
 		temp.y = y - Other.y;
 		temp.z = z - Other.z;
-		temp.m = sqrt(((x)+(y)+(z)) * 2);
 		return temp;
 	}
 	Vector3 Vector3::operator= (Vector3& Other)

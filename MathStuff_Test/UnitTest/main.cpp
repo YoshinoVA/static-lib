@@ -230,11 +230,75 @@ TEST(Vector3, Equal)
 TEST(Vector3, dotProduct)
 {
 	Vector3 left;
-	
+	left.x = 2;
+	left.y = 3;
+	left.z = 1;
+
 	Vector3 right;
+	right.x = 3;
+	right.y = 4;
+	right.z = 1;
 
 	float expected;
+	expected = 19;
+
 	float actual = left.dotProduct(right);
+
+	EXPECT_TRUE(actual == expected);
+}
+
+TEST(Vector3, magnitude)
+{
+	Vector3 left;
+	left.x = 6;
+	left.y = 7;
+	left.z = 6;
+
+	float expected;
+	expected = 11;
+
+	float actual = left.Magnitude();
+
+	EXPECT_TRUE(actual == expected);
+}
+
+TEST(Vector3, linearInterpolation)
+{
+	Vector3 left;
+	left.x = 0;
+	left.y = 0;
+	left.z = 0;
+
+	Vector3 right;
+	right.x = 0;
+	right.y = 1;
+	right.z = 0;
+
+	Vector3 expected;
+	expected.x = 0;
+	expected.y = 0.5;
+	expected.z = 0;
+
+	Vector3 actual = left.linearInterpolation(right, 0.5);
+
+	EXPECT_TRUE(actual == expected);
+}
+
+TEST(Vector3, normalize)
+{
+	Vector3 left;
+	left.x = 0;
+	left.y = 0;
+	left.z = 1;
+
+	Vector3 expected;
+	expected.x = 0;
+	expected.y = 0;
+	expected.z = 1;
+
+	Vector3 actual = left.normalize();
+
+	EXPECT_TRUE(actual == expected);
 }
 
 TEST(Vector4, Addition)
@@ -289,6 +353,44 @@ TEST(Vector4, Subtraction)
 	EXPECT_TRUE(actual.x == expected.x);
 	EXPECT_TRUE(actual.y == expected.y);
 	EXPECT_TRUE(actual.z == expected.z);
+}
+
+TEST(Vector4, Magnitude)
+{
+	Vector4 left;
+	left.x = 0;
+	left.y = 0;
+	left.z = 0;
+	left.w = 1;
+
+	float expected;
+	expected = 1;
+
+	float actual = left.Magnitude();
+
+	EXPECT_TRUE(actual == expected);
+}
+
+TEST(Vector4, normalize)
+{
+	Vector4 left;
+	left.x = 1;
+	left.y = 1;
+	left.z = 1;
+	left.w = 1;
+
+	Vector4 expected;
+	expected.x = .5;
+	expected.y = .5;
+	expected.z = .5;
+	expected.w = .5;
+
+	Vector4 actual = left.normalize();
+
+	EXPECT_TRUE(actual.x == expected.x);
+	EXPECT_TRUE(actual.y == expected.y);
+	EXPECT_TRUE(actual.z == expected.z);
+	EXPECT_TRUE(actual.w == expected.w);
 }
 
 TEST(Matrix3, Addition)

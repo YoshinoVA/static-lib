@@ -26,7 +26,6 @@ namespace MathFuncs
 		float x;
 		float y;
 		float z;
-		float m;
 
 		Vector3 crossProduct(Vector3& Other);
 		float dotProduct(Vector3& Other);
