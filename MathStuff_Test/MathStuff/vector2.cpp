@@ -136,9 +136,9 @@ namespace MathFuncs
 	{
 		return x * Other.x + y * Other.y + z * Other.z;
 	}
-	float Vector3::Magnitude(Vector3& Other)
+	float Vector3::Magnitude()
 	{
-		return sqrt(x * x + y * y);
+		return sqrt(x * x + y * y + z * z);
 	}
 	Vector3 Vector3::operator* (float& Other)
 	{
@@ -151,6 +151,14 @@ namespace MathFuncs
 	Vector3 Vector3::linearInterpolation(Vector3& Other, float t)
 	{
 		return (*this) + ((Other - *this) * t);
+	}
+	Vector3 Vector3::normalize()
+	{
+		Vector3 other;
+		other.x = x / Magnitude();
+		other.y = y / Magnitude();
+		other.z = z / Magnitude();
+		return other;
 	}
 	//Vector4
 	Vector4 Vector4::operator+ (Vector4& Other)
@@ -188,6 +196,27 @@ namespace MathFuncs
 		temp.z = other.x * matrix[0][2] + other.y * matrix[1][2] + other.z * matrix[2][2] + other.w * matrix[3][2];
 		temp.w = other.x * matrix[0][3] + other.y * matrix[1][3] + other.z * matrix[2][3] + other.w * matrix[3][3];
 		return temp;
+	}
+	float Vector4::Magnitude()
+	{
+		return sqrt(x * x + y * y + z * z + w * w);
+	}
+	Vector4 Vector4::normalize()
+	{
+		Vector4 other;
+		other.x = x / Magnitude();
+		other.y = y / Magnitude();
+		other.z = z / Magnitude();
+		other.w = w / Magnitude();
+		return other;
+	}
+	Vector4 Vector4::hexadex(unsigned int color)
+	{
+		x = ((color >> 24) & 0xFF) / 255.0;
+		y = ((color >> 16) & 0xFF) / 255.0;
+		z = ((color >> 8) & 0xFF) / 255.0;
+		w = ((color)& 0xFF) / 255.0;
+		return *this;
 	}
 	//Matrix 3x3
 	matrix3 matrix3::operator +(matrix3 other)
@@ -282,6 +311,20 @@ namespace MathFuncs
 		temp.matrix[2][2] = 1;
 		return temp;
 	}
+	matrix3 matrix3::scale(Vector3& other)
+	{
+		matrix3 temp;
+		temp.matrix[0][0] = other.x;
+		temp.matrix[0][1] = 0;
+		temp.matrix[0][2] = 0;
+		temp.matrix[1][0] = 0;
+		temp.matrix[1][1] = other.y;
+		temp.matrix[1][2] = 0;
+		temp.matrix[2][0] = 0;
+		temp.matrix[2][1] = 0;
+		temp.matrix[2][2] = other.z;
+		return temp;
+	}
 	//Matrix 4x4
 	matrix4 matrix4::operator +(matrix4 other)
 	{
@@ -346,7 +389,111 @@ namespace MathFuncs
 		temp.matrix[3][3] = (matrix[3][0] * other.matrix[0][3]) + (matrix[3][1] * other.matrix[1][3]) + (matrix[3][2] * other.matrix[2][3]) + (matrix[3][3] * other.matrix[3][3]);
 		return temp;
 	}
-
+	matrix4 matrix4::ortho(float r, float l, float n, float b, float t, float f)
+	{
+			matrix4 temp;
+			temp.matrix[0][0] = 2 / r - l;
+			temp.matrix[0][1] = 0;
+			temp.matrix[0][2] = 0;
+			temp.matrix[0][3] = -(r + l / r - l);
+			temp.matrix[1][0] = 0;
+			temp.matrix[1][1] = 2 / t - b;
+			temp.matrix[1][2] = 0;
+			temp.matrix[1][3] = -(t + b / t - b);
+			temp.matrix[2][0] = 0;
+			temp.matrix[2][1] = 0;
+			temp.matrix[2][2] = -2 / (f - n);
+			temp.matrix[2][3] = -(f + n / (f - n));
+			temp.matrix[3][0] = 0;
+			temp.matrix[3][1] = 0;
+			temp.matrix[3][2] = 0;
+			temp.matrix[3][3] = 1;
+			return temp;
+	}
+	matrix4 matrix4::scale(Vector3& other)
+	{
+		matrix4 temp;
+		temp.matrix[0][0] = other.x;
+		temp.matrix[0][1] = 0;
+		temp.matrix[0][2] = 0;
+		temp.matrix[0][3] = 0;
+		temp.matrix[1][0] = 0;
+		temp.matrix[1][1] = other.y;
+		temp.matrix[1][2] = 0;
+		temp.matrix[1][3] = 0;
+		temp.matrix[2][0] = 0;
+		temp.matrix[2][1] = 0;
+		temp.matrix[2][2] = other.z;
+		temp.matrix[2][3] = 0;
+		temp.matrix[3][0] = 0;
+		temp.matrix[3][1] = 0;
+		temp.matrix[3][2] = 0;
+		temp.matrix[3][3] = 1;
+		return temp;
+	}
+	matrix4 matrix4::rotationx(float angle)
+	{
+		matrix4 temp;
+		temp.matrix[0][0] = 1;
+		temp.matrix[0][1] = 0;
+		temp.matrix[0][2] = 0;
+		temp.matrix[0][3] = 0;
+		temp.matrix[1][0] = 0;
+		temp.matrix[1][1] = cos(angle);
+		temp.matrix[1][2] = sin(angle);
+		temp.matrix[1][2] = 0;
+		temp.matrix[2][0] = 0;
+		temp.matrix[2][1] = -sin(angle);
+		temp.matrix[2][2] = cos(angle);
+		temp.matrix[2][3] = 0;
+		temp.matrix[3][0] = 0;
+		temp.matrix[3][1] = 0;
+		temp.matrix[3][2] = 0;
+		temp.matrix[3][3] = 0;
+		return temp;
+	}
+	matrix4 matrix4::rotationy(float angle)
+	{
+		matrix4 temp;
+		temp.matrix[0][0] = cos(angle);
+		temp.matrix[0][1] = 0;
+		temp.matrix[0][2] = -sin(angle);
+		temp.matrix[0][3] = 0;
+		temp.matrix[1][0] = 0;
+		temp.matrix[1][1] = 1;
+		temp.matrix[1][2] = 0;
+		temp.matrix[1][3] = 0;
+		temp.matrix[2][0] = sin(angle);
+		temp.matrix[2][1] = 0;
+		temp.matrix[2][2] = cos(angle);
+		temp.matrix[2][3] = 0;
+		temp.matrix[3][0] = 0;
+		temp.matrix[3][1] = 0;
+		temp.matrix[3][2] = 0;
+		temp.matrix[3][3] = 0;
+		return temp;
+	}
+	matrix4 matrix4::rotationz(float angle)
+	{
+		matrix4 temp;
+		temp.matrix[0][0] = cos(angle);
+		temp.matrix[0][1] = sin(angle);
+		temp.matrix[0][2] = 0;
+		temp.matrix[0][3] = 0;
+		temp.matrix[1][0] = -sin(angle);
+		temp.matrix[1][1] = cos(angle);
+		temp.matrix[1][2] = 0;
+		temp.matrix[1][3] = 0;
+		temp.matrix[2][0] = 0;
+		temp.matrix[2][1] = 0;
+		temp.matrix[2][2] = 1;
+		temp.matrix[2][3] = 0;
+		temp.matrix[3][0] = 0;
+		temp.matrix[3][1] = 0;
+		temp.matrix[3][2] = 0;
+		temp.matrix[3][3] = 0;
+		return temp;
+	}
 	float CommonMath::degreesToRadian(float degrees)
 	{
 		float returnNumber;
@@ -355,5 +502,36 @@ namespace MathFuncs
 		returnNumber = degrees * 3.14 / 180.0;
 
 		return returnNumber;
+	}
+	float CommonMath::linearInterpolation(float left, float right, float t)
+	{
+		return (left) + ((right - left) * t);
+	}
+	float CommonMath::testValueOf2(float other)
+	{
+		for (int i = 1;; i++)
+		{
+			int pon = pow(2.f, i);
+			if (pon == other)
+			{
+				return other;
+			}
+			else
+			{
+				if (pon > other)
+				{
+					float previous = abs(pow(2.f, i - 1) - other);
+					float current = pon - other;
+					if (previous < current)
+					{
+						return pow(2.f, i - 1);
+					}
+					else
+					{
+						return pon;
+					}
+				}
+			}
+		}
 	}
 }

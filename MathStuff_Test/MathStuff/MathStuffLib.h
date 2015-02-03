@@ -31,8 +31,9 @@ namespace MathFuncs
 
 		Vector3 crossProduct(Vector3& Other);
 		float dotProduct(Vector3& Other);
-		float Magnitude(Vector3& Other);
+		float Magnitude();
 		Vector3 linearInterpolation(Vector3& Other, float t);
+		Vector3 normalize();
 
 		Vector3 operator+ (Vector3& Other);
 		Vector3 operator- (Vector3& Other);
@@ -53,6 +54,9 @@ namespace MathFuncs
 		Vector4 operator+ (Vector4& Other);
 		Vector4 operator- (Vector4& Other);
 		Vector4 operator* (Vector4& Other);
+		float Magnitude();
+		Vector4 normalize();
+		Vector4 hexadex(unsigned int color);
 	};
 	class matrix3
 	{
@@ -70,6 +74,7 @@ namespace MathFuncs
 		matrix3 rotationx (float angle);
 		matrix3 rotationy (float angle);
 		matrix3 rotationz (float angle);
+		matrix3 scale(Vector3& other);
 	};
 	class matrix4
 	{
@@ -82,12 +87,18 @@ namespace MathFuncs
 		matrix4 operator -(matrix4 m2);
 		matrix4 operator *(matrix4 m2);
 		Vector4 transformVector(Vector4 other);
+		matrix4 ortho(float r, float l, float n, float b, float t, float f);
+		matrix4 rotationx(float angle);
+		matrix4 rotationy(float angle);
+		matrix4 rotationz(float angle);
+		matrix4 scale(Vector3& other);
 	};
 	class CommonMath
 	{
 	public:
 		
 		static float degreesToRadian(float degrees);
-
+		float linearInterpolation(float left, float right, float t);
+		float testValueOf2(float other);
 	};
 }
