@@ -1,0 +1,13 @@
+﻿Build started 12/1/2014 4:59:20 PM.
+     1>Project "C:\Users\austin.hollenbeck\Documents\Visual Studio 2013\Projects\StaticLibrary\MathStuff\MathStuff.vcxproj" on node 2 (Rebuild target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt vector2.cpp
+         vector2.cpp
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"C:\Users\austin.hollenbeck\Documents\Visual Studio 2013\Projects\StaticLibrary\Debug\MathStuff.lib" /NOLOGO Debug\vector2.obj
+         MathStuff.vcxproj -> C:\Users\austin.hollenbeck\Documents\Visual Studio 2013\Projects\StaticLibrary\Debug\MathStuff.lib
+     1>Done Building Project "C:\Users\austin.hollenbeck\Documents\Visual Studio 2013\Projects\StaticLibrary\MathStuff\MathStuff.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.20
