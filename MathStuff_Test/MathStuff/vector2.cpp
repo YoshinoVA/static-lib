@@ -18,12 +18,31 @@ namespace MathFuncs
 		temp.y = y - Other.y;
 		return temp;
 	}
-	Vector2 Vector2::operator* (Vector2& Other)
+	Vector2 Vector2::operator= (Vector2& Other)
 	{
-		Vector2 temp;
-		temp.x = x * Other.x;
-		temp.y = y * Other.y;
-		return temp;
+		x = Other.x;
+		y = Other.y;
+		return *this;
+	}
+	bool Vector2::operator== (Vector2& Other)
+	{
+		if (x == Other.x)
+		{
+			
+		}
+		else
+		{
+			return false;
+		}
+		if (y == Other.y)
+		{
+
+		}
+		else
+		{
+			return false;
+		}
+		return true;
 	}
 	Vector2 Vector2::operator* (float& Other)
 	{
@@ -36,13 +55,20 @@ namespace MathFuncs
 	{
 		return x * Other.x + y * Other.y;
 	}
-	float Vector2::Magnitude(Vector2& Other)
+	float Vector2::Magnitude()
 	{
 		return sqrt(x * x + y * y);
 	}
 	Vector2 Vector2::linearInterpolation(Vector2& Other, float t)
 	{
 		return (*this) + ((Other - *this) * t);
+	}
+	Vector2 Vector2::normalize()
+	{
+		Vector2 other;
+		other.x = x / Magnitude();
+		other.y = y / Magnitude();
+		return other;
 	}
 	//Vector3
 	Vector3 Vector3::operator+ (Vector3& Other)
@@ -63,18 +89,48 @@ namespace MathFuncs
 		temp.m = sqrt(((x)+(y)+(z)) * 2);
 		return temp;
 	}
-	Vector3 Vector3::operator* (Vector3& Other)
+	Vector3 Vector3::operator= (Vector3& Other)
+	{
+		x = Other.x;
+		y = Other.y;
+		z = Other.z;
+		return *this;
+	}
+	bool Vector3::operator== (Vector3& Other)
+	{
+		if (x == Other.x)
+		{
+
+		}
+		else
+		{
+			return false;
+		}
+		if (y == Other.y)
+		{
+
+		}
+		else
+		{
+			return false;
+		}
+		if (z == Other.z)
+		{
+
+		}
+		else
+		{
+			return false;
+		}
+		return true;
+	}
+	Vector3 Vector3::crossProduct(Vector3& Other)
 	{
 		Vector3 temp;
-		temp.x = x * Other.x;
-		temp.y = y * Other.y;
-		temp.z = z * Other.z;
-		temp.m = sqrt(((x)+(y)+(z)) * 2);
+		temp.x = y * Other.z - z * Other.y;
+		temp.y = z * Other.x - x * Other.z;
+		temp.z = x * Other.y - y * Other.x;
 		return temp;
-	}
-	float Vector3::crossProduct(Vector3& Other)
-	{
-		return x * Other.z + y * Other.x + z * Other.y;
 	}
 	float Vector3::dotProduct(Vector3& Other)
 	{

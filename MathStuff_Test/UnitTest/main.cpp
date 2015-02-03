@@ -13,6 +13,112 @@ TEST(demoTest, DemoFirstTest)
 	//EXPECT_FLOAT_EQ()
 }
 
+TEST(Vector2, Equal)
+{
+	Vector2 left;
+	left.x = 1;
+	left.y = 1;
+
+	Vector2 right;
+	right.x = 1;
+	right.y = 1;
+
+	Vector2 expected;
+	expected.x = 1;
+	expected.y = 1;
+
+	Vector2 actual = left = right;
+
+	EXPECT_TRUE(actual.x == expected.x);
+	EXPECT_TRUE(actual.y == expected.y);
+}
+
+TEST(Vector2, DoubleEqual)
+{
+	Vector2 left;
+	left.x = 1;
+	left.y = 1;
+
+	Vector2 right;
+	right.x = 1;
+	right.y = 1;
+
+	Vector2 expected;
+	expected.x = 1;
+	expected.y = 1;
+
+	Vector2 actual = left = right;
+
+	EXPECT_TRUE(actual.x == expected.x);
+	EXPECT_TRUE(actual.y == expected.y);
+}
+
+TEST(Vector2, dotProduct)
+{
+	Vector2 left;
+	left.x = 2;
+	left.y = 3;
+
+	Vector2 right;
+	right.x = 3;
+	right.y = 4;
+
+	float expected;
+	expected = 18;
+
+	float actual = left.dotProduct(right);
+
+	EXPECT_TRUE(actual == expected);
+}
+
+TEST(Vector2, Magnitude)
+{
+	Vector2 left;
+	left.x = 3;
+	left.y = 4;
+
+	float expected;
+	expected = 5;
+
+	float actual = left.Magnitude();
+	
+	EXPECT_TRUE(actual == expected);
+}
+
+TEST(Vector2, linearInterpolation)
+{
+	Vector2 left;
+	left.x = 0;
+	left.y = 0;
+
+	Vector2 right;
+	right.x = 0;
+	right.y = 1;
+
+	Vector2 expected;
+	expected.x = 0;
+	expected.y = 0.5;
+
+	Vector2 actual = left.linearInterpolation(right, 0.5);
+
+	EXPECT_TRUE(actual == expected);
+}
+
+TEST(Vector2, normalize)
+{
+	Vector2 left;
+	left.x = 3;
+	left.y = 4;
+
+	Vector2 expected;
+	expected.x = 0.6;
+	expected.y = 0.8;
+
+	Vector2 actual = left.normalize();
+
+	EXPECT_TRUE(actual == expected);
+}
+
 TEST(Vector2, Addition)
 {
 	Vector2 left;
@@ -51,42 +157,26 @@ TEST(Vector2, Subtract)
 	EXPECT_TRUE(actual.y == expected.y);
 }
 
-TEST(Vector3, multiply)
+TEST(Vector3, CrossProduct)
 {
-	Vector2 left;
-	left.x = 1;
-	left.y = 2;
-	Vector2 right;
-	right.x = 1;
+	Vector3 left;
+	left.x = 5;
+	left.y = 3;
+	left.z = 4;
+
+	Vector3 right;
+	right.x = 5;
 	right.y = 3;
+	right.z = 7;
 
-	Vector2 expected;
-	expected.x = 1;
-	expected.y = 6;
+	Vector3 expected;
+	expected.x = 9;
+	expected.y = -15;
+	expected.z = 0;
 
-	Vector2 actual = left * right;
+	Vector3 actual = left.crossProduct(right);
 
-	EXPECT_TRUE(actual.x == expected.x);
-	EXPECT_TRUE(actual.y == expected.y);
-}
-
-TEST(Vector3, multiplyFloat)
-{
-	Vector2 left;
-	left.x = 1;
-	left.y = 2;
-	Vector2 right;
-	right.x = 1;
-	right.y = 3;
-
-	Vector2 expected;
-	expected.x = 1;
-	expected.y = 6;
-
-	Vector2 actual = left * right;
-
-	EXPECT_TRUE(actual.x == expected.x);
-	EXPECT_TRUE(actual.y == expected.y);
+	EXPECT_TRUE(actual == expected);
 }
 
 TEST(Vector3, Addition)
@@ -135,50 +225,26 @@ TEST(Vector3, Subtraction)
 	EXPECT_TRUE(actual.z == expected.z);
 }
 
-TEST(Vector3, Multiply)
+TEST(Vector3, Equal)
 {
 	Vector3 left;
 	left.x = 1;
-	left.y = 2;
-	left.z = 3;
+	left.y = 1;
+	left.z = 1;
+
 	Vector3 right;
 	right.x = 1;
-	right.y = 3;
-	right.z = 5;
+	right.y = 1;
+	right.z = 1;
 
 	Vector3 expected;
 	expected.x = 1;
-	expected.y = 6;
-	expected.z = 15;
+	expected.y = 1;
+	expected.z = 1;
 
-	Vector3 actual = left * right;
+	Vector3 actual = left = right;
 
-	EXPECT_TRUE(actual.x == expected.x);
-	EXPECT_TRUE(actual.y == expected.y);
-	EXPECT_TRUE(actual.z == expected.z);
-}
-
-TEST(Vector3, MultiplyFloat)
-{
-	Vector3 left;
-	left.x = 1;
-	left.y = 2;
-	left.z = 3;
-	Vector3 right;
-	right.x = 1;
-	right.y = 3;
-	right.z = 5;
-
-	Vector3 expected;
-	expected.x = 1;
-	expected.y = 6;
-	expected.z = 15;
-
-	Vector3 actual = left * right;
-
-	EXPECT_TRUE(actual.x == expected.x);
-	EXPECT_TRUE(actual.y == expected.y);
-	EXPECT_TRUE(actual.z == expected.z);
+	EXPECT_TRUE(actual == expected);
 }
 
 TEST(Vector4, Addition)

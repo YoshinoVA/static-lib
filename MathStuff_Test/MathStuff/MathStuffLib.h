@@ -11,14 +11,15 @@ namespace MathFuncs
 		
 		float crossProduct(Vector2& Other);
 		float dotProduct(Vector2& Other);
-		float Magnitude(Vector2& Other);
+		float Magnitude();
 		Vector2 linearInterpolation(Vector2& Other, float t);
 
 		Vector2 operator+ (Vector2& Other);
 		Vector2 operator- (Vector2& Other);
-		Vector2 operator* (Vector2& Other);
+		Vector2 operator= (Vector2& Other);
+		bool operator== (Vector2& Other);
 		Vector2 operator* (float& Other);
-
+		Vector2 normalize();
 	};
 	class Vector3
 	{
@@ -28,7 +29,7 @@ namespace MathFuncs
 		float z;
 		float m;
 
-		float crossProduct(Vector3& Other);
+		Vector3 crossProduct(Vector3& Other);
 		float dotProduct(Vector3& Other);
 		float Magnitude(Vector3& Other);
 		Vector3 linearInterpolation(Vector3& Other, float t);
@@ -36,6 +37,8 @@ namespace MathFuncs
 		Vector3 operator+ (Vector3& Other);
 		Vector3 operator- (Vector3& Other);
 		Vector3 operator* (Vector3& Other);
+		Vector3 operator= (Vector3& Other);
+		bool operator== (Vector3& Other);
 		Vector3 operator* (float& Other);
 	};
 
