@@ -9,7 +9,6 @@ namespace MathFuncs
 		float x;
 		float y;
 		
-		float crossProduct(Vector2& Other);
 		float dotProduct(Vector2& Other);
 		float Magnitude();
 		Vector2 linearInterpolation(Vector2& Other, float t);
@@ -34,7 +33,6 @@ namespace MathFuncs
 		float Magnitude();
 		Vector3 linearInterpolation(Vector3& Other, float t);
 		Vector3 normalize();
-
 		Vector3 operator+ (Vector3& Other);
 		Vector3 operator- (Vector3& Other);
 		Vector3 operator* (Vector3& Other);
@@ -53,7 +51,6 @@ namespace MathFuncs
 
 		Vector4 operator+ (Vector4& Other);
 		Vector4 operator- (Vector4& Other);
-		Vector4 operator* (Vector4& Other);
 		float Magnitude();
 		Vector4 normalize();
 		Vector4 hexadex(unsigned int color);

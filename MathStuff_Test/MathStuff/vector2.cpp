@@ -179,24 +179,6 @@ namespace MathFuncs
 		temp.z = z - Other.z;
 		return temp;
 	}
-	Vector4 Vector4::operator* (Vector4& Other)
-	{
-		Vector4 temp;
-		temp.w = w * Other.w;
-		temp.x = x * Other.x;
-		temp.y = y * Other.y;
-		temp.z = z * Other.z;
-		return temp;
-	}
-	Vector4 matrix4::transformVector(Vector4 other)
-	{
-		Vector4 temp;
-		temp.x = other.x * matrix[0][0] + other.y * matrix[1][0] + other.z * matrix[2][0] + other.w * matrix[3][0];
-		temp.y = other.x * matrix[0][1] + other.y * matrix[1][1] + other.z * matrix[2][1] + other.w * matrix[3][1];
-		temp.z = other.x * matrix[0][2] + other.y * matrix[1][2] + other.z * matrix[2][2] + other.w * matrix[3][2];
-		temp.w = other.x * matrix[0][3] + other.y * matrix[1][3] + other.z * matrix[2][3] + other.w * matrix[3][3];
-		return temp;
-	}
 	float Vector4::Magnitude()
 	{
 		return sqrt(x * x + y * y + z * z + w * w);
@@ -449,7 +431,7 @@ namespace MathFuncs
 		temp.matrix[3][0] = 0;
 		temp.matrix[3][1] = 0;
 		temp.matrix[3][2] = 0;
-		temp.matrix[3][3] = 0;
+		temp.matrix[3][3] = 1;
 		return temp;
 	}
 	matrix4 matrix4::rotationy(float angle)
@@ -470,7 +452,7 @@ namespace MathFuncs
 		temp.matrix[3][0] = 0;
 		temp.matrix[3][1] = 0;
 		temp.matrix[3][2] = 0;
-		temp.matrix[3][3] = 0;
+		temp.matrix[3][3] = 1;
 		return temp;
 	}
 	matrix4 matrix4::rotationz(float angle)
@@ -491,7 +473,22 @@ namespace MathFuncs
 		temp.matrix[3][0] = 0;
 		temp.matrix[3][1] = 0;
 		temp.matrix[3][2] = 0;
-		temp.matrix[3][3] = 0;
+		temp.matrix[3][3] = 1;
+		return temp;
+	}
+	Vector4 matrix4::transformVector(Vector4 other)
+	{
+		Vector4 temp;
+		temp.x = other.x * matrix[0][0] + other.y * matrix[1][0] + other.z * matrix[2][0] + other.w * matrix[3][0];
+		temp.y = other.x * matrix[0][1] + other.y * matrix[1][1] + other.z * matrix[2][1] + other.w * matrix[3][1];
+		temp.z = other.x * matrix[0][2] + other.y * matrix[1][2] + other.z * matrix[2][2] + other.w * matrix[3][2];
+		temp.w = other.x * matrix[0][3] + other.y * matrix[1][3] + other.z * matrix[2][3] + other.w * matrix[3][3];
+		if (temp.w != 1 && temp.w != 0)
+		{
+			temp.x = other.x / temp.w;
+			temp.y = other.y / temp.w;
+			temp.z = other.z / temp.w;
+		}
 		return temp;
 	}
 	float CommonMath::degreesToRadian(float degrees)
