@@ -198,6 +198,42 @@ namespace MathFuncs
 		w = ((color)& 0xFF) / 255.0;
 		return *this;
 	}
+	bool Vector4::operator== (Vector4& other)
+	{
+		if (abs(x - other.x) < 0.001)
+		{
+
+		}
+		else
+		{
+			return false;
+		}
+		if (abs(y - other.y) < 0.001)
+		{
+
+		}
+		else
+		{
+			return false;
+		}
+		if (abs(z - other.z) < 0.001)
+		{
+
+		}
+		else
+		{
+			return false;
+		}
+		if (abs(w - other.w) < 0.001)
+		{
+
+		}
+		else
+		{
+			return false;
+		}
+		return true;
+	}
 	//Matrix 3x3
 	matrix3 matrix3::operator +(matrix3 other)
 	{
@@ -486,6 +522,7 @@ namespace MathFuncs
 			temp.x = other.x / temp.w;
 			temp.y = other.y / temp.w;
 			temp.z = other.z / temp.w;
+			temp.w = 1;
 		}
 		return temp;
 	}

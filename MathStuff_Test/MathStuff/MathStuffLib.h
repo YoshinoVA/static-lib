@@ -53,6 +53,7 @@ namespace MathFuncs
 		float Magnitude();
 		Vector4 normalize();
 		Vector4 hexadex(unsigned int color);
+		bool operator== (Vector4& other);
 	};
 	class matrix3
 	{

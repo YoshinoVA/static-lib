@@ -963,6 +963,72 @@ TEST(matrix4, scale)
 	EXPECT_TRUE(actual.matrix[3][3] == expected.matrix[3][3]);
 }
 
+TEST(matrix4, rotationx)
+{
+	matrix4 left;
+	left = left.rotationx(CommonMath::degreesToRadian(90.f));
+
+	Vector4 point;
+	point.x = 0;
+	point.y = 0;
+	point.z = 1;
+	point.w = 1;
+
+	point = left.transformVector(point);
+
+	Vector4 expected;
+	expected.x = 0;
+	expected.y = -1;
+	expected.z = 0;
+	expected.w = 1;
+
+	EXPECT_TRUE(point == expected);
+}
+
+TEST(matrix4, rotationy)
+{
+	matrix4 left;
+	left = left.rotationy(CommonMath::degreesToRadian(90.f));
+
+	Vector4 point;
+	point.x = 1;
+	point.y = 0;
+	point.z = 0;
+	point.w = 1;
+
+	point = left.transformVector(point);
+
+	Vector4 expected;
+	expected.x = 0;
+	expected.y = 0;
+	expected.z = -1;
+	expected.w = 1;
+
+	EXPECT_TRUE(point == expected);
+}
+
+TEST(matrix4, rotationz)
+{
+	matrix4 left;
+	left = left.rotationz(CommonMath::degreesToRadian(90.f));
+
+	Vector4 point;
+	point.x = 1;
+	point.y = 0;
+	point.z = 0;
+	point.w = 1;
+
+	point = left.transformVector(point);
+
+	Vector4 expected;
+	expected.x = 0;
+	expected.y = 1;
+	expected.z = 0;
+	expected.w = 1;
+
+	EXPECT_TRUE(point == expected);
+}
+
 TEST(CommonMath, degreesToRadian)
 {
 	float radians = CommonMath::degreesToRadian(90);
