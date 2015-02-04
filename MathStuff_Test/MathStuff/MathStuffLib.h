@@ -94,7 +94,8 @@ namespace MathFuncs
 	public:
 		
 		static float degreesToRadian(float degrees);
-		float linearInterpolation(float left, float right, float t);
-		float testValueOf2(float other);
+		static float linearInterpolation(float left, float right, float t);
+		static float testValueOf2(float other);
+		static float radianToDegrees(float radians);
 	};
 }

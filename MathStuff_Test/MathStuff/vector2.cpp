@@ -26,7 +26,7 @@ namespace MathFuncs
 	}
 	bool Vector2::operator== (Vector2& Other)
 	{
-		if (x == Other.x)
+		if (abs(x - Other.x) < 0.001)
 		{
 			
 		}
@@ -34,7 +34,7 @@ namespace MathFuncs
 		{
 			return false;
 		}
-		if (y == Other.y)
+		if (abs(y - Other.y) < 0.001)
 		{
 
 		}
@@ -96,7 +96,7 @@ namespace MathFuncs
 	}
 	bool Vector3::operator== (Vector3& Other)
 	{
-		if (x == Other.x)
+		if (abs(x - Other.x) < 0.001)
 		{
 
 		}
@@ -104,7 +104,7 @@ namespace MathFuncs
 		{
 			return false;
 		}
-		if (y == Other.y)
+		if (abs(y - Other.y) < 0.001)
 		{
 
 		}
@@ -112,7 +112,7 @@ namespace MathFuncs
 		{
 			return false;
 		}
-		if (z == Other.z)
+		if (abs(z - Other.z) < 0.001)
 		{
 
 		}
@@ -369,7 +369,7 @@ namespace MathFuncs
 		temp.matrix[3][3] = (matrix[3][0] * other.matrix[0][3]) + (matrix[3][1] * other.matrix[1][3]) + (matrix[3][2] * other.matrix[2][3]) + (matrix[3][3] * other.matrix[3][3]);
 		return temp;
 	}
-	matrix4 matrix4::ortho(float r, float l, float n, float b, float t, float f)
+	matrix4 matrix4::ortho(float r, float l, float t, float b, float f, float n)
 	{
 			matrix4 temp;
 			temp.matrix[0][0] = 2 / r - l;
@@ -495,6 +495,15 @@ namespace MathFuncs
 		
 		// degrees to radian
 		returnNumber = degrees * 3.14 / 180.0;
+
+		return returnNumber;
+	}
+	float CommonMath::radianToDegrees(float radians)
+	{
+		float returnNumber;
+
+		// degrees to radian
+		returnNumber = radians * 180 / 3.14;
 
 		return returnNumber;
 	}
